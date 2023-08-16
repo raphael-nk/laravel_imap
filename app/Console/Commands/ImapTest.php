@@ -32,22 +32,22 @@ class ImapTest extends Command
         // Get specific folder
         $folders = $client->getFolder('INBOX');  // get the read inbox
 
-        // foreach($folders as $folder){
-        //     $this->info("Acces folder: ".$folder->path);
-        //     $messages = $folder->messages()->all()->limit(1, 0)->get();
+        foreach($folders as $folder){
+            $this->info("Acces folder: ".$folder->path);
+            $messages = $folder->messages()->all()->limit(1, 0)->get();
 
-        //     $this->info("Number of messages: ".$messages->count());
+            $this->info("Number of messages: ".$messages->count());
 
-        //     foreach ($messages as $message) {
-        //         $this->info("\tMessage: ".$message->message_id);
-        //         $this->info("\tSubject: ".$message->getSubject());
-        //         $this->info("\tBody: ".$message->getHTMLBody(true));
-        //     }
-        // }
+            foreach ($messages as $message) {
+                $this->info("\tMessage: ".$message->message_id);
+                $this->info("\tSubject: ".$message->getSubject());
+                $this->info("\tBody: ".$message->getHTMLBody(true));
+            }
+        }
         // $message = $folders->query()->all()->get(); // Get all messages from the INBOX
-        $message = $folders->query()->text('IMAP')->get();
+        // $message = $folders->query()->text('IMAP')->get();
 
-        $this->info($message);
+        // $this->info($message);
 
         return 0;
     }
